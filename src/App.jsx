@@ -17,6 +17,9 @@ import { FavoriteProvider } from "./Context/favorite";
 import Checkout from "./Components/Pages/Checkout/Checkout";
 import NotFound from "./Components/NotFound/NotFound";
 
+
+
+
 const router = createBrowserRouter([
   {
     path: "/",
