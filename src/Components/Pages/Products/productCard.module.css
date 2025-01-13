@@ -1,0 +1,129 @@
+.card {
+  background: white;
+  border-radius: 15px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  height: 100%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.15);
+}
+
+.imageContainer {
+  position: relative;
+  aspect-ratio: 1;
+  overflow: hidden;
+}
+
+.productImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.5s ease;
+}
+
+.card:hover .productImage {
+  transform: scale(1.05);
+}
+
+.favoriteButton {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  background: rgba(255, 255, 255, 0.9);
+  border: none;
+  border-radius: 50%;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: #dc3545;
+  opacity: 0;
+  transform: translateY(-10px);
+}
+
+.card:hover .favoriteButton {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.favoriteButton.active {
+  background: #dc3545;
+  color: white;
+}
+
+.cardBody {
+  padding: 1.5rem;
+}
+
+.productLink {
+  text-decoration: none;
+  color: inherit;
+}
+
+.cardTitle {
+  font-size: 1.1rem;
+  margin-bottom: 0.8rem;
+  color: var(--dark-blue);
+  transition: color 0.3s ease;
+}
+
+.productLink:hover .cardTitle {
+  color: var(--primary-blue);
+}
+
+.price {
+  font-weight: bold;
+  color: var(--primary-blue);
+  font-size: 1.2rem;
+  margin-bottom: 1rem;
+}
+
+.cartButton {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 8px;
+  background: var(--primary-blue);
+  color: white;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  transition: all 0.3s ease;
+}
+
+.cartButton:hover {
+  background: var(--dark-blue);
+}
+
+.cartButton.removeBtn {
+  background: #dc3545;
+}
+
+.cartButton.removeBtn:hover {
+  background: #bb2d3b;
+}
+
+.buttonIcon {
+  font-size: 1.1rem;
+}
+
+@media (max-width: 768px) {
+  .favoriteButton {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  .card {
+    max-width: 320px;
+    margin: 0 auto;
+  }
+} 

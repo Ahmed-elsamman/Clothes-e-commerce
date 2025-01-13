@@ -1,72 +1,63 @@
 import { Link } from "react-router-dom";
-import { FaCartPlus } from "react-icons/fa";
-import { FaHeartBroken } from "react-icons/fa";
-import { useContext, useState } from "react";
+import { FaCartPlus, FaHeart, FaHeartBroken } from "react-icons/fa";
+import { useContext } from "react";
 import { cartContext } from "../../../Context/cart";
 import { IoBagRemove } from "react-icons/io5";
+import { favoriteContext } from "../../../Context/favorite";
+import { motion } from "framer-motion";
+import styles from "./productCard.module.css";
 
 export default function ProductCard({ product }) {
-  const { cart, addToCart, removeFromCart } = useContext(cartContext);
-  const [flag, setFlag] = useState(true);
+  const { isInCart, addToCart, removeFromCart } = useContext(cartContext);
+  const { isInFavorites, addToFavorites, removeFromFavorites } = useContext(favoriteContext);
+  
+  const inCart = isInCart(product);
+  const inFavorites = isInFavorites(product);
 
-  function handleAddToCart(product) {
-    addToCart(product);
-    setFlag(false);
-  }
-  function handleRemoveFromCart(product) {
-    removeFromCart(product);
-    setFlag(true);
-  }
-  // "ss".splie(" ").splece(0, 2).join(" ");
   return (
-    <>
-      <div
-        className=" col-md-3  col-sm-6  col-12  mx-1 shadow-lg p-3 mb-5 bg-body rounded h-100"
-        style={{ width: "18rem", height: "30rem" }}
-      >
-        <Link to={`/prod/${product.id}`}>
-          <div className="card border-0">
+    <motion.div
+      className="col-md-3 col-sm-6 col-12 mx-1"
+      initial={{ opacity: 0, y: 20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.3 }}
+    >
+      <div className={styles.card}>
+        <div className={styles.imageContainer}>
+          <Link to={`/prod/${product.id}`}>
             <img
               src={product.images[0]}
-              className="card-img-top"
+              className={styles.productImage}
               alt={product.title}
             />
-            <div className="card-body">
-              <h5 className="card-title">
-                {product.title.split(" ").splice(0, 2).join(" ")}
-              </h5>
-              <p className="card-text"> {product.price}EGP</p>
-            </div>
-          </div>
-        </Link>
-        <div className=" d-flex justify-content-between  align-items-center  gx-5">
-          {flag ? (
-            <button
-              className="btn btn-primary justify-content-center align-items-center w-75 me-5 "
-              onClick={() => handleAddToCart(product)}
-            >
-              <span className="mx-2 fw-bold w-50 text-white">
-                <FaCartPlus />
-              </span>
-              ADD{" "}
-            </button>
-          ) : (
-            <button
-              className="btn btn-primary justify-content-center align-items-center w-75 me-5 bg-danger "
-              onClick={() => handleRemoveFromCart(product)}
-            >
-              <span className="mx-2 fw-bold w-50 text-white ">
-                <IoBagRemove />
-              </span>
-              Remove
-            </button>
-          )}
-
-          <span className="me-1 fw-bold w-50 text-danger ">
-            <FaHeartBroken />
-          </span>
+          </Link>
+          <button
+            className={`${styles.favoriteButton} ${inFavorites ? styles.active : ''}`}
+            onClick={() => inFavorites ? removeFromFavorites(product.id) : addToFavorites(product)}
+          >
+            {inFavorites ? <FaHeartBroken /> : <FaHeart />}
+          </button>
+        </div>
+        
+        <div className={styles.cardBody}>
+          <Link to={`/prod/${product.id}`} className={styles.productLink}>
+            <h5 className={styles.cardTitle}>
+              {product.title.split(" ").splice(0, 2).join(" ")}
+            </h5>
+          </Link>
+          <p className={styles.price}>{product.price} EGP</p>
+          
+          <motion.button
+            className={`${styles.cartButton} ${inCart ? styles.removeBtn : ''}`}
+            onClick={() => inCart ? removeFromCart(product.id) : addToCart(product)}
+            whileTap={{ scale: 0.95 }}
+          >
+            <span className={styles.buttonIcon}>
+              {inCart ? <IoBagRemove /> : <FaCartPlus />}
+            </span>
+            {inCart ? 'Remove from Cart' : 'Add to Cart'}
+          </motion.button>
         </div>
       </div>
-    </>
+    </motion.div>
   );
 }

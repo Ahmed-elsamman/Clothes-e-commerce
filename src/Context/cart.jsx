@@ -1,65 +1,81 @@
-import { createContext, useState } from "react";
+import { createContext, useState, useEffect } from "react";
 
 export const cartContext = createContext();
+
 export function CartProvider({ children }) {
-  const [cart, setCart] = useState([]);
-  const [flagCart, setFlagCart] = useState(true);
+  const [cart, setCart] = useState(() => {
+    const savedCart = localStorage.getItem("cart");
+    return savedCart ? JSON.parse(savedCart) : [];
+  });
+
+  // حفظ السلة في localStorage كلما تتغير
+  useEffect(() => {
+    localStorage.setItem("cart", JSON.stringify(cart));
+  }, [cart]);
+
   const addToCart = (product) => {
     if (isInCart(product)) {
-      return setCart(
+      setCart(
         cart.map((item) =>
           item.id === product.id
             ? { ...item, quantityFromCart: item.quantityFromCart + 1 }
             : item
         )
       );
+    } else {
+      setCart([...cart, { ...product, quantityFromCart: 1 }]);
     }
-
-    setCart([...cart, { ...product, quantityFromCart: 1, onCart: true }]);
-    localStorage.removeItem("cart");
-
-    localStorage.setItem("cart", JSON.stringify(cart));
-    setFlagCart(false);
   };
-  const removeFromCart = (product) => {
-    setCart(cart.filter((item) => item.id !== product.id));
-    localStorage.setItem("cart", cart);
-    setFlagCart(true);
+
+  const removeFromCart = (productId) => {
+    setCart(cart.filter((item) => item.id !== productId));
   };
+
+  const decreaseQuantity = (productId) => {
+    setCart(
+      cart.map((item) => {
+        if (item.id === productId) {
+          const newQuantity = item.quantityFromCart - 1;
+          return newQuantity === 0
+            ? null
+            : { ...item, quantityFromCart: newQuantity };
+        }
+        return item;
+      }).filter(Boolean)
+    );
+  };
+
   const clearCart = () => {
     setCart([]);
     localStorage.removeItem("cart");
   };
+
   const isInCart = (product) => {
-    if (localStorage.getItem("cart") === null) {
-      return cart.some((item) => item.id === product.id);
-    }
+    return cart.some((item) => item.id === product.id);
   };
+
   const getCartTotal = () => {
-    if (localStorage.getItem("cart") === null) {
-      return cart.reduce(
-        (total, item) => total + item.price * item.quantity,
-        0
-      );
-    }
+    return cart.reduce(
+      (total, item) => total + item.price * item.quantityFromCart,
+      0
+    );
   };
+
   const getCartQuantity = () => {
-    if (localStorage.getItem("cart") === null) {
-      return cart.reduce((total, item) => total + item.quantity, 0);
-    }
+    return cart.reduce((total, item) => total + item.quantityFromCart, 0);
   };
+
   return (
     <cartContext.Provider
       value={{
         cart,
-        setFlagCart,
-        flagCart,
         addToCart,
         removeFromCart,
         clearCart,
         isInCart,
         getCartTotal,
         getCartQuantity,
+        decreaseQuantity,
       }}
     >
       {children}

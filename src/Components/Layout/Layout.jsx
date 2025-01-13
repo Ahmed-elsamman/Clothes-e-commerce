@@ -4,11 +4,11 @@ import Footer from "../Footer/Footer";
 
 export default function Layout() {
   return (
-    <div className="container-fluid">
+    <div className="container-fluid ">
       <Header />
-
-      <Outlet />
-
+      <div className="ms-5 ms-md-0">
+        <Outlet />
+      </div>
       <Footer />
     </div>
   );

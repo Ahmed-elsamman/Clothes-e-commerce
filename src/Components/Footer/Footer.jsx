@@ -1,191 +1,110 @@
-export default function div() {
+import { Link } from "react-router-dom";
+import { FaFacebook, FaTwitter, FaInstagram, FaLinkedin, FaGithub } from "react-icons/fa";
+import "./Footer.css";
+export default function Footer() {
   return (
-    <>
-      {/* <!-- Remove the container if you want to extend the div to full width. --> */}
-      <div className="container-fluid mt-5 d-flex justify-content-center">
-        {/* <!-- div --> */}
-        <div
-          className="text-center text-lg-start text-dark"
-          style={{ backgroundColor: "#ECEFF1" }}
-        >
-          {/* <!-- Section: Social media --> */}
-          <section
-            className="d-flex justify-content-between p-4 text-white"
-            style={{ backgroundColor: "#21D192" }}
-          >
-            {/* <!-- Left --> */}
-            <div className="me-5">
-              <span>Get connected with us on social networks:</span>
-            </div>
-            {/* <!-- Left --> */}
-
-            {/* <!-- Right --> */}
-            <div>
-              <a href="" className="text-white me-4">
-                <i className="fab fa-facebook-f"></i>
-              </a>
-              <a href="" className="text-white me-4">
-                <i className="fab fa-twitter"></i>
-              </a>
-              <a href="" className="text-white me-4">
-                <i className="fab fa-google"></i>
-              </a>
-              <a href="" className="text-white me-4">
-                <i className="fab fa-instagram"></i>
-              </a>
-              <a href="" className="text-white me-4">
-                <i className="fab fa-linkedin"></i>
-              </a>
-              <a href="" className="text-white me-4">
-                <i className="fab fa-github"></i>
-              </a>
-            </div>
-            {/* <!-- Right --> */}
-          </section>
-          {/* <!-- Section: Social media --> */}
-
-          {/* <!-- Section: Links  --> */}
-          <section className="">
-            <div className="container text-center text-md-start mt-5">
-              {/* <!-- Grid row --> */}
-              <div className="row mt-3">
-                {/* <!-- Grid column --> */}
-                <div className="col-md-3 col-lg-4 col-xl-3 mx-auto mb-4">
-                  {/* <!-- Content --> */}
-                  <h6 className="text-uppercase fw-bold">Company name</h6>
-                  <hr
-                    className="mb-4 mt-0 d-inline-block mx-auto"
-                    style={{
-                      width: "60px",
-                      backgroundColor: "#7c4dff",
-                      height: "2px",
-                    }}
-                  />
-                  <p>
-                    Here you can use rows and columns to organize your div
-                    content. Lorem ipsum dolor sit amet, consectetur adipisicing
-                    elit.
-                  </p>
-                </div>
-                {/* <!-- Grid column --> */}
-
-                {/* <!-- Grid column --> */}
-                <div className="col-md-2 col-lg-2 col-xl-2 mx-auto mb-4">
-                  {/* <!-- Links --> */}
-                  <h6 className="text-uppercase fw-bold">Products</h6>
-                  <hr
-                    className="mb-4 mt-0 d-inline-block mx-auto"
-                    style={{
-                      width: "60px",
-                      backgroundColor: "#7c4dff",
-                      height: "2px",
-                    }}
-                  />
-                  <p>
-                    <a href="#!" className="text-dark">
-                      MDBootstrap
-                    </a>
-                  </p>
-                  <p>
-                    <a href="#!" className="text-dark">
-                      MDWordPress
-                    </a>
-                  </p>
-                  <p>
-                    <a href="#!" className="text-dark">
-                      BrandFlow
-                    </a>
-                  </p>
-                  <p>
-                    <a href="#!" className="text-dark">
-                      Bootstrap Angular
-                    </a>
-                  </p>
-                </div>
-                {/* <!-- Grid column --> */}
-
-                {/* <!-- Grid column --> */}
-                <div className="col-md-3 col-lg-2 col-xl-2 mx-auto mb-4">
-                  {/* <!-- Links --> */}
-                  {/* <h6 className="text-uppercase fw-bold">Useful links</h6> */}
-                  <hr
-                    className="mb-4 mt-0 d-inline-block mx-auto"
-                    style={{
-                      width: "60px",
-                      backgroundColor: "#7c4dff",
-                      height: "2px",
-                    }}
-                  />
-                  <p>
-                    <a href="#!" className="text-dark">
-                      Your Account
-                    </a>
-                  </p>
-                  <p>
-                    <a href="#!" className="text-dark">
-                      Become an Affiliate
-                    </a>
-                  </p>
-                  <p>
-                    <a href="#!" className="text-dark">
-                      Shipping Rates
-                    </a>
-                  </p>
-                  <p>
-                    <a href="#!" className="text-dark">
-                      Help
-                    </a>
-                  </p>
-                </div>
-                {/* <!-- Grid column --> */}
-
-                {/* <!-- Grid column --> */}
-                <div className="col-md-4 col-lg-3 col-xl-3 mx-auto mb-md-0 mb-4">
-                  {/* <!-- Links --> */}
-                  <h6 className="text-uppercase fw-bold">Contact</h6>
-                  <hr
-                    className="mb-4 mt-0 d-inline-block mx-auto"
-                    style={{
-                      width: "60px",
-                      backgroundColor: "#7c4dff",
-                      height: "2px",
-                    }}
-                  />
-                  <p>
-                    <i className="fas fa-home mr-3"></i> New York, NY 10012, US
-                  </p>
-                  <p>
-                    <i className="fas fa-envelope mr-3"></i> info@example.com
-                  </p>
-                  <p>
-                    <i className="fas fa-phone mr-3"></i> + 01 234 567 88
-                  </p>
-                  <p>
-                    <i className="fas fa-print mr-3"></i> + 01 234 567 89
-                  </p>
-                </div>
-                {/* <!-- Grid column --> */}
-              </div>
-              {/* <!-- Grid row --> */}
-            </div>
-          </section>
-          {/* <!-- Section: Links  --> */}
-
-          {/* <!-- Copyright --> */}
-          <div
-            className="text-center p-3"
-            style={{ backgroundColor: "#121010" }}
-          >
-            &copy; 2020 Copyright:
-            <a className="text-dark" href="https://mdbootstrap.com/">
-              MDBootstrap.com
+    <footer className="footer mt-auto py-4" style={{ 
+      backgroundColor: "#1a1a1a",
+      position: "relative",
+      bottom: 0,
+      width: "100%",
+      marginTop: "auto"
+    }}>
+      <div className="container">
+        {/* Social Media Section */}
+        <div className="row py-4 border-bottom border-secondary">
+          <div className="col-md-6 text-center text-md-start mb-3 mb-md-0">
+            <h5 className="text-white">Connect With Us</h5>
+          </div>
+          <div className="col-md-6 text-center text-md-end">
+            <a href="#" className="text-white me-4 social-icon-link">
+              <FaFacebook size={24} className="social-icon" />
+            </a>
+            <a href="#" className="text-white me-4 social-icon-link">
+              <FaTwitter size={24} className="social-icon" />
+            </a>
+            <a href="#" className="text-white me-4 social-icon-link">
+              <FaInstagram size={24} className="social-icon" />
+            </a>
+            <a href="#" className="text-white me-4 social-icon-link">
+              <FaLinkedin size={24} className="social-icon" />
+            </a>
+            <a href="#" className="text-white social-icon-link">
+              <FaGithub size={24} className="social-icon" />
             </a>
           </div>
-          {/* <!-- Copyright --> */}
         </div>
-        {/* <!-- div --> */}
+
+        {/* Main Footer Content */}
+        <div className="row py-4">
+          {/* About Us Column */}
+          <div className="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <h5 className="text-white mb-3">About Store</h5>
+            <p className="text-white-50">
+              Our online store offers the best products at competitive prices with excellent customer service available 24/7.
+            </p>
+          </div>
+
+          {/* Quick Links Column */}
+          <div className="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <h5 className="text-white mb-3">Quick Links</h5>
+            <ul className="list-unstyled">
+              <li className="mb-2">
+                <Link to="/" className="text-white-50 text-decoration-none footer-link">Home</Link>
+              </li>
+              <li className="mb-2">
+                <Link to="/products" className="text-white-50 text-decoration-none footer-link">Products</Link>
+              </li>
+              <li className="mb-2">
+                <Link to="/about" className="text-white-50 text-decoration-none footer-link">About Us</Link>
+              </li>
+              <li className="mb-2">
+                <Link to="/contact" className="text-white-50 text-decoration-none footer-link">Contact</Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contact Info Column */}
+          <div className="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <h5 className="text-white mb-3">Contact Info</h5>
+            <ul className="list-unstyled text-white-50">
+              <li className="mb-2">Address: Cairo, Egypt</li>
+              <li className="mb-2">Phone: 123-456-789</li>
+              <li className="mb-2">Email: info@store.com</li>
+            </ul>
+          </div>
+
+          {/* Newsletter Column */}
+          <div className="col-lg-3 col-md-6 mb-4 mb-lg-0">
+            <h5 className="text-white mb-3">Newsletter</h5>
+            <p className="text-white-50">Subscribe to get special offers and updates</p>
+            <div className="input-group">
+              <input 
+                type="email" 
+                className="form-control" 
+                placeholder="Enter your email"
+                style={{ backgroundColor: "#2a2a2a", border: "1px solid #3a3a3a", color: "#fff" }}
+              />
+              <button 
+                className="btn btn-primary" 
+                type="button"
+                style={{ zIndex: 0 }}
+              >
+                Subscribe
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Copyright */}
+        <div className="row pt-3 border-top border-secondary">
+          <div className="col-md-12 text-center">
+            <p className="text-white-50 mb-0">
+              &copy; {new Date().getFullYear()} All Rights Reserved
+            </p>
+          </div>
+        </div>
       </div>
-      {/* <!-- End of .container --> */}
-    </>
+    </footer>
   );
 }
