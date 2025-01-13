@@ -1,7 +1,7 @@
 import axios from "axios";
-import { ColorRing } from "react-loader-spinner";
 import { useQuery } from "react-query";
 import { useParams } from "react-router-dom";
+import Loader from "../../Loader/Loader";
 
 export default function ProductDetails() {
   const { id } = useParams();
@@ -10,32 +10,17 @@ export default function ProductDetails() {
   function getProductById(id) {
     return axios.get(`https://api.escuelajs.co/api/v1/products/${id}`);
   }
-  const { data, isError, isFetching, isLoading } = useQuery(
+  const { data, isLoading } = useQuery(
     ["ProductDetails", id],
     () => getProductById(id),
-    {
-      //   enabled: !!prodID.id,
-      cacheTime: 1000,
-    }
+    {}
   );
   console.log("data", data?.data);
 
   return (
     <>
       {isLoading ? (
-        <div className="container">
-          <div className="justify-content-center  align-items-center  vw-100 vh-100">
-            <ColorRing
-              visible={true}
-              height="80"
-              width="80"
-              ariaLabel="color-ring-loading"
-              wrapperStyle={{}}
-              wrapperClass="color-ring-wrapper"
-              colors={["#e15b64", "#f47e60", "#f8b26a", "#abbd81", "#849b87"]}
-            />
-          </div>
-        </div>
+        <Loader />
       ) : (
         <div className="container my-5">
           <div className="row">
