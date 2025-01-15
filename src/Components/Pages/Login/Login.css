@@ -1,138 +1,202 @@
 /* From Uiverse.io by ammarsaa */
-.form {
+.login-container {
+  min-height: 100vh;
   display: flex;
-  flex-direction: column;
-  gap: 10px;
-  max-width: 350px;
-  padding: 20px;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  padding: 1rem;
+}
+
+.form-container {
+  width: 100%;
+  max-width: 400px;
+}
+
+.form {
+  background: rgba(255, 255, 255, 0.9);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 20px;
-  position: relative;
-  background-color: #1a1a1a;
-  color: #fff;
-  border: 1px solid #333;
+  padding: 2rem;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
 }
 
 .title {
-  font-size: 28px;
-  font-weight: 600;
-  letter-spacing: -1px;
+  font-size: 2rem;
+  font-weight: 700;
+  color: var(--dark-blue);
+  margin-bottom: 0.5rem;
+  text-align: center;
+}
+
+.message {
+  color: #666;
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.input-group {
+  margin-bottom: 1.5rem;
+}
+
+.input-wrapper {
   position: relative;
+}
+
+.input-icon {
+  position: absolute;
+  left: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #666;
+  z-index: 1;
+}
+
+.input {
+  width: 100%;
+  padding: 1rem 1rem 1rem 3rem;
+  border: 2px solid #eee;
+  border-radius: 10px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  background: white;
+}
+
+.input:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 0 3px rgba(0, 102, 204, 0.1);
+  transform: scale(1.01);
+}
+
+label {
+  position: relative;
+  width: 100%;
+}
+
+label span {
+  position: absolute;
+  left: 3rem;
+  top: 1rem;
+  color: #666;
+  transition: all 0.3s ease;
+  pointer-events: none;
+}
+
+.input:focus + span,
+.input:not(:placeholder-shown) + span {
+  transform: translateY(-2.3rem);
+  font-size: 0.875rem;
+  color: var(--primary-blue);
+}
+
+.forgot-password {
+  text-align: right;
+  margin-bottom: 1.5rem;
+}
+
+.forgot-password a {
+  color: var(--primary-blue);
+  font-size: 0.875rem;
+}
+
+.submit {
+  width: 100%;
+  padding: 1rem;
+  background: var(--primary-blue);
+  color: white;
+  border: none;
+  border-radius: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.submit:hover {
+  background: var(--dark-blue);
+}
+
+.or-divider {
+  text-align: center;
+  margin: 1.5rem 0;
+  color: #666;
+  position: relative;
+}
+
+.or-divider::before,
+.or-divider::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 45%;
+  height: 1px;
+  background: #ddd;
+}
+
+.or-divider::before {
+  left: 0;
+}
+
+.or-divider::after {
+  right: 0;
+}
+
+.social-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.social-button {
+  flex: 1;
+  padding: 0.75rem;
+  border: 2px solid #eee;
+  border-radius: 10px;
+  background: white;
+  color: #333;
+  font-weight: 500;
   display: flex;
   align-items: center;
-  padding-left: 30px;
-  color: #00bfff;
+  justify-content: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
 }
 
-.title::before {
-  width: 18px;
-  height: 18px;
-}
-
-.title::after {
-  width: 18px;
-  height: 18px;
-  animation: pulse 1s linear infinite;
-}
-
-.title::before,
-.title::after {
-  position: absolute;
-  content: "";
-  height: 16px;
-  width: 16px;
-  border-radius: 50%;
-  left: 0px;
-  background-color: #00bfff;
-}
-
-.message,
-.signin {
-  font-size: 14.5px;
-  color: rgba(255, 255, 255, 0.7);
+.social-button:hover {
+  border-color: var(--primary-blue);
+  color: var(--primary-blue);
 }
 
 .signin {
   text-align: center;
-}
-
-.signin a:hover {
-  text-decoration: underline royalblue;
+  margin-top: 1.5rem;
+  color: #666;
 }
 
 .signin a {
-  color: #00bfff;
-}
-
-.flex {
-  display: flex;
-  width: 100%;
-  gap: 6px;
-}
-
-.form label {
-  position: relative;
-}
-
-.form label .input {
-  background-color: #333;
-  color: #fff;
-  width: 100%;
-  padding: 20px 05px 05px 10px;
-  outline: 0;
-  border: 1px solid rgba(105, 105, 105, 0.397);
-  border-radius: 10px;
-}
-
-.form label .input + span {
-  color: rgba(255, 255, 255, 0.5);
-  position: absolute;
-  left: 10px;
-  top: 0px;
-  font-size: 0.9em;
-  cursor: text;
-  transition: 0.3s ease;
-}
-
-.form label .input:placeholder-shown + span {
-  top: 12.5px;
-  font-size: 0.9em;
-}
-
-.form label .input:focus + span,
-.form label .input:valid + span {
-  color: #00bfff;
-  top: 0px;
-  font-size: 0.7em;
+  color: var(--primary-blue);
   font-weight: 600;
 }
-
-.input {
-  font-size: medium;
-}
-
-.submit {
-  border: none;
-  outline: none;
-  padding: 10px;
+.error {
+  color: rgb(246, 246, 246);
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+  text-align: center;
+  margin-bottom: 1.3rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+  background-color: red;
   border-radius: 10px;
-  color: #fff;
-  font-size: 16px;
-  transform: 0.3s ease;
-  background-color: #00bfff;
+  padding: 0.1rem;
 }
-
-.submit:hover {
-  background-color: #00bfff96;
-}
-
-@keyframes pulse {
-  from {
-    transform: scale(0.9);
-    opacity: 1;
+@media (max-width: 480px) {
+  .form {
+    padding: 1.5rem;
   }
-
-  to {
-    transform: scale(1.8);
-    opacity: 0;
+  
+  .social-buttons {
+    flex-direction: column;
   }
 }

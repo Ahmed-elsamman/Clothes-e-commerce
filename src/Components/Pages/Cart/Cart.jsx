@@ -1,7 +1,7 @@
 import { useContext } from "react";
-import { cartContext } from "../../Context/cart";
+import { cartContext } from "../../../Context/cart";
 import { FaPlus, FaMinus, FaTrash } from "react-icons/fa";
-import Favorite from "../Pages/Favorite/Favorite";
+import Favorite from "../Favorite/Favorite";
 import { Link } from "react-router-dom";
 
 export default function Cart() {

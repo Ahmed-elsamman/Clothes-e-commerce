@@ -1,11 +1,25 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { BsCart } from "react-icons/bs";
 import { useContext } from "react";
 import { cartContext } from "../../Context/cart";
 import logo from "../../images/saman_logo22.png";
+import { UserAccountContext } from "../../Context/auth";
+import { FaUser } from "react-icons/fa";
 
 export default function Header() {
   const { cart } = useContext(cartContext);
+  const { isLoggedIn, logoutUser, user } = useContext(UserAccountContext);
+  const navigate =useNavigate()
+
+  const getDisplayName = () => {
+    if (user?.firstName) {
+      return `${user.firstName} ${user.lastName}`;
+    }
+    return user?.email?.split('@')[0] || 'User';
+  };
+  function name(params) {
+    
+  }
 
   return (
     <nav
@@ -70,31 +84,56 @@ export default function Header() {
               </Link>
             </li>
 
-            {/* <li className="nav-item mx-2">
-              <Link
-                className="nav-link fw-bold text-dark"
-                to="favorite"
-              >
-                Favorite
-              </Link>
-            </li> */}
-
-            <li className="nav-item mx-2">
-              <Link
-                className="nav-link fw-bold text-dark"
-                to="login"
-              >
-                Login
-              </Link>
-            </li>
-            <li className="nav-item mx-2">
-              <Link
-                className="btn btn-primary fw-bold"
-                to="register"
-              >
-                Register
-              </Link>
-            </li>
+            {isLoggedIn ? (
+              <>
+                <li className="nav-item dropdown mx-2">
+                  <a
+                    className="nav-link dropdown-toggle d-flex align-items-center"
+                    href="#"
+                    role="button"
+                    data-bs-toggle="dropdown"
+                    aria-expanded="false"
+                  >
+                    <FaUser className="me-2" />
+                    <span>{getDisplayName()}</span>
+                  </a>
+                  <ul className="dropdown-menu">
+                    <li>
+                      <Link className="dropdown-item" to="/profile">
+                        Profile
+                      </Link>
+                    </li>
+                    <li>
+                      <hr className="dropdown-divider" />
+                    </li>
+                    <li>
+                      <button
+                        className="dropdown-item text-danger"
+                        onClick={() => {
+                          logoutUser();
+                          
+                        }}
+                      >
+                        Logout
+                      </button>
+                    </li>
+                  </ul>
+                </li>
+              </>
+            ) : (
+              <>
+                <li className="nav-item mx-2">
+                  <Link className="nav-link fw-bold text-dark" to="login">
+                    Login
+                  </Link>
+                </li>
+                <li className="nav-item mx-2">
+                  <Link className="btn btn-primary fw-bold text-light" to="register">
+                    Register
+                  </Link>
+                </li>
+              </>
+            )}
           </ul>
         </div>
       </div>
