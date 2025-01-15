@@ -1,0 +1,45 @@
+.filterSection {
+  background: white;
+  padding: 1.5rem;
+  border-radius: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 2rem;
+}
+
+.filterInput {
+  border: 1px solid #dee2e6;
+  border-radius: 6px;
+  padding: 0.5rem;
+  width: 100%;
+  transition: border-color 0.3s ease;
+}
+
+.filterInput:focus {
+  border-color: var(--primary-blue);
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(0, 102, 204, 0.1);
+}
+
+.resetButton {
+  background-color: var(--primary-blue);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.resetButton:hover {
+  background-color: var(--dark-blue);
+}
+
+@media (max-width: 768px) {
+  .filterSection {
+    padding: 1rem;
+  }
+  
+  .filterInput {
+    margin-bottom: 1rem;
+  }
+} 
