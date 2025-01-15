@@ -77,7 +77,7 @@ export default function Header() {
               </li>
             ))}
             
-            <li className="nav-item me-5">
+            <li className="nav-item me-md-5">
               <Link
                 className={`nav-link fw-bold text-dark d-flex align-items-center  ${styles.navLink}`}
                 to="/cart"
