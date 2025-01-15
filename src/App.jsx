@@ -17,6 +17,8 @@ import { FavoriteProvider } from "./Context/favorite";
 import Checkout from "./Components/Pages/Checkout/Checkout";
 import NotFound from "./Components/NotFound/NotFound";
 import { UserAccountProvider } from "./Context/auth";
+import MainSlider from "./Components/Slider/Slider";
+import Profile from "./Components/Pages/Profile/Profile";
 
 const router = createBrowserRouter([
   {
@@ -33,6 +35,8 @@ const router = createBrowserRouter([
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
       { path: "favorite", element: <Favorite /> },
+      { path: "test", element: <MainSlider /> },
+      { path: "profile", element: <Profile /> },
     ],
   },
   { path: "*", element: <NotFound /> },

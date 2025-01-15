@@ -1,15 +1,17 @@
 import { Link, useNavigate } from "react-router-dom";
 import { BsCart } from "react-icons/bs";
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import { cartContext } from "../../Context/cart";
 import logo from "../../images/saman_logo22.png";
 import { UserAccountContext } from "../../Context/auth";
 import { FaUser } from "react-icons/fa";
+import styles from './header.module.css';
 
 export default function Header() {
   const { cart } = useContext(cartContext);
   const { isLoggedIn, logoutUser, user } = useContext(UserAccountContext);
-  const navigate =useNavigate()
+  const navigate = useNavigate();
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   const getDisplayName = () => {
     if (user?.firstName) {
@@ -17,9 +19,16 @@ export default function Header() {
     }
     return user?.email?.split('@')[0] || 'User';
   };
-  function name(params) {
-    
-  }
+
+  const handleLogout = () => {
+    logoutUser();
+    setIsMenuOpen(false);
+    navigate('/login');
+  };
+
+  const toggleMenu = () => {
+    setIsMenuOpen(!isMenuOpen);
+  };
 
   return (
     <nav
@@ -47,37 +56,37 @@ export default function Header() {
         <button
           className="navbar-toggler border-0"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
+          onClick={toggleMenu}
+          aria-expanded={isMenuOpen}
           aria-label="Toggle navigation"
         >
           <span className="navbar-toggler-icon"></span>
         </button>
 
-        <div className="collapse navbar-collapse" id="navbarSupportedContent">
+        <div className={`collapse navbar-collapse ${isMenuOpen ? 'show' : ''} ${styles.navbarCollapse}`}>
           <ul className="navbar-nav ms-auto mb-2 mb-lg-0 align-items-center">
             {['Home', 'Products', 'About'].map((item) => (
-              <li className="nav-item mx-2" key={item}>
+              <li className="nav-item" key={item}>
                 <Link
-                  className="nav-link fw-bold text-dark hover-effect"
+                  className={`nav-link fw-bold text-dark ${styles.navLink}`}
                   to={item === 'Home' ? '/' : `/${item.toLowerCase()}`}
+                  onClick={() => setIsMenuOpen(false)}
                 >
                   {item}
                 </Link>
               </li>
             ))}
             
-            <li className="nav-item position-relative mx-2">
+            <li className="nav-item me-5">
               <Link
-                className="nav-link fw-bold text-dark d-flex align-items-center"
+                className={`nav-link fw-bold text-dark d-flex align-items-center  ${styles.navLink}`}
                 to="/cart"
+                onClick={() => setIsMenuOpen(false)}
               >
                 <BsCart size={20} />
                 <span className="ms-1">Cart</span>
                 {cart.length > 0 && (
-                  <span className="position-absolute top-0 start-75 translate-middle badge rounded-pill bg-danger">
+                  <span className={`badge rounded-pill bg-danger ms-1 ${styles.cartBadge}`}>
                     {cart.length}
                   </span>
                 )}
@@ -85,50 +94,55 @@ export default function Header() {
             </li>
 
             {isLoggedIn ? (
-              <>
-                <li className="nav-item dropdown mx-2">
-                  <a
-                    className="nav-link dropdown-toggle d-flex align-items-center"
-                    href="#"
-                    role="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    <FaUser className="me-2" />
-                    <span>{getDisplayName()}</span>
-                  </a>
-                  <ul className="dropdown-menu">
-                    <li>
-                      <Link className="dropdown-item" to="/profile">
-                        Profile
-                      </Link>
-                    </li>
-                    <li>
-                      <hr className="dropdown-divider" />
-                    </li>
-                    <li>
-                      <button
-                        className="dropdown-item text-danger"
-                        onClick={() => {
-                          logoutUser();
-                          
-                        }}
-                      >
-                        Logout
-                      </button>
-                    </li>
-                  </ul>
-                </li>
-              </>
+              <li className="nav-item dropdown">
+                <a
+                  className={`nav-link dropdown-toggle d-flex align-items-center ${styles.navLink}`}
+                  href="#"
+                  role="button"
+                  data-bs-toggle="dropdown"
+                  aria-expanded="false"
+                >
+                  <FaUser className="me-2" />
+                  <span>{getDisplayName()}</span>
+                </a>
+                <ul className="dropdown-menu">
+                  <li>
+                    <Link 
+                      className="dropdown-item" 
+                      to="/profile"
+                      onClick={() => setIsMenuOpen(false)}
+                    >
+                      Profile
+                    </Link>
+                  </li>
+                  <li><hr className="dropdown-divider" /></li>
+                  <li>
+                    <button
+                      className="dropdown-item text-danger"
+                      onClick={handleLogout}
+                    >
+                      Logout
+                    </button>
+                  </li>
+                </ul>
+              </li>
             ) : (
               <>
-                <li className="nav-item mx-2">
-                  <Link className="nav-link fw-bold text-dark" to="login">
+                <li className="nav-item">
+                  <Link 
+                    className={`nav-link fw-bold text-dark ${styles.navLink}`}
+                    to="/login"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
                     Login
                   </Link>
                 </li>
-                <li className="nav-item mx-2">
-                  <Link className="btn btn-primary fw-bold text-light" to="register">
+                <li className="nav-item">
+                  <Link 
+                    className={`btn btn-primary fw-bold ${styles.navLink}`}
+                    to="/register"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
                     Register
                   </Link>
                 </li>

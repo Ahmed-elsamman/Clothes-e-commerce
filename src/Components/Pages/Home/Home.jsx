@@ -2,40 +2,61 @@ import homePic from "../../../images/arrangement-black-friday-shopping-carts-wit
 import axios from "axios";
 import { useQuery } from "react-query";
 import Loader from "../../Loader/Loader";
-import ProductCard from "../Products/ProductCard";
+import MainSlider from "../../Slider/Slider";
+
 export default function Home() {
   function getAllProducts() {
     return axios.get("https://api.escuelajs.co/api/v1/products");
   }
-  const { data, isLoading } = useQuery("products", getAllProducts, {
-    refetchOnWindowFocus: false,
-  });
+
+  function getAllCategories() {
+    return axios.get("https://api.escuelajs.co/api/v1/categories");
+  }
+
+  const { data: productsData, isLoading: productsLoading } = useQuery(
+    "products",
+    getAllProducts,
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  const { data: categoriesData, isLoading: categoriesLoading } = useQuery(
+    "categories",
+    getAllCategories,
+    {
+      refetchOnWindowFocus: false,
+    }
+  );
+
+  if (productsLoading || categoriesLoading) return <Loader />;
+
   return (
     <>
-      <div className="">
-        <img src={homePic} alt="Home pic " width="100%" className=" " />
+      <div className="mb-4">
+        <img src={homePic} alt="Home pic" width="100%" className="img-fluid" />
       </div>
-      <div>
-        <h1 className="text-center mt-5">Welcome to Our Store</h1>
-        <>
-          {isLoading ? (
-            <Loader />
-          ) : (
-            <div className="container-fluid   ">
-              <div className="row g-4 mt-5 justify-content-center align-items-center">
-                {data?.data
-                  .filter(
-                    (product) =>
-                      !product.images[0].includes("[") &&
-                      !product.images[0].includes("]")
-                  )
-                  .map((product) => (
-                    <ProductCard key={product.id} product={product} />
-                  ))}
-              </div>
-            </div>
-          )}
-        </>
+
+      <div className="container">
+        <div className="mb-5">
+          <h2 className="text-center mb-4">Shop by Category</h2>
+          <MainSlider 
+            items={categoriesData?.data} 
+            type="category" 
+          />
+        </div>
+
+        <div className="mb-5">
+          <h2 className="text-center mb-4">Featured Products</h2>
+          <MainSlider 
+            items={productsData?.data.filter(
+              product => 
+                !product.images[0].includes("[") && 
+                !product.images[0].includes("]")
+            )} 
+            type="product" 
+          />
+        </div>
       </div>
     </>
   );
