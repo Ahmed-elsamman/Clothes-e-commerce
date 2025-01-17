@@ -22,6 +22,7 @@ import Profile from "./Components/Pages/Profile/Profile";
 import Test from "./Components/Test/Test";
 
 const router = createHashRouter([
+
   {
     path: "/",
     element: <Layout />,
