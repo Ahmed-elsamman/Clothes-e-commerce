@@ -11,7 +11,7 @@ export default function Products() {
     title: "",
     price_min: "",
     price_max: "",
-    categoryId: categoryId || ""
+    categoryId: categoryId || "",
   });
 
   // Function to build the URL with filters
@@ -38,15 +38,15 @@ export default function Products() {
     ["products", filters],
     () => axios.get(buildFilterUrl()),
     {
-      keepPreviousData: true
+      keepPreviousData: true,
     }
   );
 
   const handleFilterChange = (e) => {
     const { name, value } = e.target;
-    setFilters(prev => ({
+    setFilters((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
@@ -55,7 +55,7 @@ export default function Products() {
       title: "",
       price_min: "",
       price_max: "",
-      categoryId: categoryId || ""
+      categoryId: categoryId || "",
     });
   };
 
@@ -101,7 +101,7 @@ export default function Products() {
               onChange={handleFilterChange}
             >
               <option value="">All Categories</option>
-              {categories?.data?.map(category => (
+              {categories?.data?.map((category) => (
                 <option key={category.id} value={category.id}>
                   {category.name}
                 </option>
@@ -109,10 +109,7 @@ export default function Products() {
             </select>
           </div>
           <div className="col-md-2 mb-3">
-            <button
-              className="btn btn-secondary w-100"
-              onClick={handleReset}
-            >
+            <button className="btn btn-secondary w-100" onClick={handleReset}>
               Reset Filters
             </button>
           </div>

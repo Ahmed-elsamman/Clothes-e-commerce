@@ -1,8 +1,10 @@
-import homePic from "../../../images/arrangement-black-friday-shopping-carts-with-copy-space.jpg";
+import homePic from "../../../images/homePic.jpg";
 import axios from "axios";
 import { useQuery } from "react-query";
 import Loader from "../../Loader/Loader";
 import MainSlider from "../../Slider/Slider";
+import { motion } from "framer-motion";
+import styles from "./home.module.css";
 
 export default function Home() {
   function getAllProducts() {
@@ -32,22 +34,55 @@ export default function Home() {
   if (productsLoading || categoriesLoading) return <Loader />;
 
   return (
-    <>
-      <div className="mb-4">
-        <img src={homePic} alt="Home pic" width="100%" className="img-fluid" />
-      </div>
+    <div className={styles.homeContainer}>
+      <motion.div 
+        className={styles.heroSection}
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+      >
+        <div className={styles.heroContent}>
+          <motion.h1 
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.2 }}
+          >
+            Welcome to Our Online Store
+          </motion.h1>
+          <motion.p
+            initial={{ y: 20, opacity: 0 }}
+            animate={{ y: 0, opacity: 1 }}
+            transition={{ delay: 0.4 }}
+          >
+            Discover amazing products at great prices
+          </motion.p>
+        </div>
+        <div className={styles.heroImageWrapper}>
+          <img src={homePic} alt="Home pic" className={styles.heroImage} />
+        </div>
+      </motion.div>
 
-      <div className="container">
-        <div className="mb-5">
-          <h2 className="text-center mb-4">Shop by Category</h2>
+      <div className={styles.mainContent}>
+        <motion.div 
+          className={styles.categorySection}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.6 }}
+        >
+          <h2 className={styles.sectionTitle}>Shop by Category</h2>
           <MainSlider 
             items={categoriesData?.data} 
             type="category" 
           />
-        </div>
+        </motion.div>
 
-        <div className="mb-5">
-          <h2 className="text-center mb-4">Featured Products</h2>
+        <motion.div 
+          className={styles.productsSection}
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 0.8 }}
+        >
+          <h2 className={styles.sectionTitle}>Featured Products</h2>
           <MainSlider 
             items={productsData?.data.filter(
               product => 
@@ -56,8 +91,8 @@ export default function Home() {
             )} 
             type="product" 
           />
-        </div>
+        </motion.div>
       </div>
-    </>
+    </div>
   );
 }

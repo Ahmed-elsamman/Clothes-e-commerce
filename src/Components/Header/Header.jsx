@@ -2,7 +2,6 @@ import { Link, useNavigate } from "react-router-dom";
 import { BsCart } from "react-icons/bs";
 import { useContext, useState } from "react";
 import { cartContext } from "../../Context/cart";
-import logo from "../../images/saman_logo22.png";
 import { UserAccountContext } from "../../Context/auth";
 import { FaUser } from "react-icons/fa";
 import styles from './header.module.css';
@@ -45,7 +44,7 @@ export default function Header() {
       <div className="container">
         <Link className="navbar-brand d-flex align-items-center" to="/">
           <img
-            src={logo}
+            src='mainLogo.png'
             alt="Logo"
             width="60"
             height="60"
