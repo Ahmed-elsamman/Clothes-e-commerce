@@ -1,0 +1,140 @@
+.homeContainer {
+  min-height: 100vh;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+}
+
+.heroSection {
+  position: relative;
+  height: 80vh;
+  min-height: 600px;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(10px);
+}
+
+.heroContent {
+  position: relative;
+  z-index: 2;
+  padding: 2rem 4rem;
+  max-width: 600px;
+}
+
+.heroContent h1 {
+  font-size: 3.5rem;
+  color: var(--dark-blue);
+  margin-bottom: 1.5rem;
+  line-height: 1.2;
+}
+
+.heroContent p {
+  font-size: 1.2rem;
+  color: #666;
+  margin-bottom: 2rem;
+}
+
+.heroImageWrapper {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 60%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.heroImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transform: scale(1.1);
+  transition: transform 0.3s ease;
+}
+
+.mainContent {
+  padding: 4rem 2rem;
+}
+
+.sectionTitle {
+  text-align: center;
+  color: var(--dark-blue);
+  font-size: 2.5rem;
+  margin-bottom: 2rem;
+  position: relative;
+}
+
+.sectionTitle::after {
+  content: '';
+  position: absolute;
+  bottom: -10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 100px;
+  height: 3px;
+  background: var(--primary-blue);
+}
+
+.categorySection,
+.productsSection {
+  margin-bottom: 4rem;
+  background: white;
+  border-radius: 20px;
+  padding: 2rem;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+@media (max-width: 1024px) {
+  .heroContent h1 {
+    font-size: 3rem;
+  }
+  
+  .heroImageWrapper {
+    width: 50%;
+  }
+}
+
+@media (max-width: 768px) {
+  .heroSection {
+    flex-direction: column;
+    height: auto;
+    padding: 2rem 0;
+  }
+
+  .heroContent {
+    padding: 2rem;
+    text-align: center;
+  }
+
+  .heroContent h1 {
+    font-size: 2.5rem;
+  }
+
+  .heroImageWrapper {
+    position: relative;
+    width: 100%;
+    height: 300px;
+    margin-top: 2rem;
+  }
+
+  .mainContent {
+    padding: 2rem 1rem;
+  }
+
+  .sectionTitle {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroContent h1 {
+    font-size: 2rem;
+  }
+
+  .heroContent p {
+    font-size: 1rem;
+  }
+
+  .heroImageWrapper {
+    height: 200px;
+  }
+} 

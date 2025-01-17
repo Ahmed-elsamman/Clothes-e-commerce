@@ -1,4 +1,4 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { createBrowserRouter, createHashRouter, RouterProvider } from "react-router-dom";
 import "./App.css";
 
 import Home from "./Components/Pages/Home/Home";
@@ -19,8 +19,9 @@ import NotFound from "./Components/NotFound/NotFound";
 import { UserAccountProvider } from "./Context/auth";
 import MainSlider from "./Components/Slider/Slider";
 import Profile from "./Components/Pages/Profile/Profile";
+import Test from "./Components/Test/Test";
 
-const router = createBrowserRouter([
+const router = createHashRouter([
   {
     path: "/",
     element: <Layout />,
@@ -35,7 +36,7 @@ const router = createBrowserRouter([
       { path: "login", element: <Login /> },
       { path: "register", element: <Register /> },
       { path: "favorite", element: <Favorite /> },
-      { path: "test", element: <MainSlider /> },
+      { path: "test", element: <Test /> },
       { path: "profile", element: <Profile /> },
     ],
   },
