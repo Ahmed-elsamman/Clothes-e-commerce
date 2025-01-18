@@ -9,10 +9,12 @@ import { FaHeart, FaHeartBroken, FaCartPlus } from "react-icons/fa";
 import { IoBagRemove } from "react-icons/io5";
 import { motion } from "framer-motion";
 import styles from "./productDetails.module.css";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function ProductDetails() {
   const { id } = useParams();
-  const { isInFavorites, addToFavorites, removeFromFavorites } = useContext(favoriteContext);
+  const { isInFavorites, addToFavorites, removeFromFavorites } =
+    useContext(favoriteContext);
   const { isInCart, addToCart, removeFromCart } = useContext(cartContext);
 
   function getProductById(id) {
@@ -25,6 +27,16 @@ export default function ProductDetails() {
     {}
   );
 
+  function handleAddToCart(product) {
+    addToCart(product);
+    toast.success("Product added to cart successfully");
+  }
+
+  function handleRemoveFromCart(product) {
+    removeFromCart(product.id);
+    toast.error("Product removed from cart successfully");
+  }
+
   if (isLoading) return <Loader />;
 
   const product = data?.data;
@@ -34,7 +46,7 @@ export default function ProductDetails() {
   return (
     <div className="container my-5">
       <div className={styles.productContainer}>
-        <motion.div 
+        <motion.div
           className={styles.imageSection}
           initial={{ opacity: 0, x: -20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -47,7 +59,7 @@ export default function ProductDetails() {
           />
         </motion.div>
 
-        <motion.div 
+        <motion.div
           className={styles.detailsSection}
           initial={{ opacity: 0, x: 20 }}
           animate={{ opacity: 1, x: 0 }}
@@ -57,27 +69,40 @@ export default function ProductDetails() {
           <h4 className={styles.category}>{product.category.name}</h4>
           <p className={styles.description}>{product.description}</p>
           <p className={styles.price}>{product.price} EGP</p>
-          
+
           <div className={styles.actionButtons}>
             <motion.button
-              className={`${styles.cartButton} ${inCart ? styles.removeBtn : ''}`}
-              onClick={() => inCart ? removeFromCart(product.id) : addToCart(product)}
+              className={`${styles.cartButton} ${
+                inCart ? styles.removeBtn : ""
+              }`}
+              onClick={() =>
+                inCart
+                  ? handleRemoveFromCart(product)
+                  : handleAddToCart(product)
+              }
               whileTap={{ scale: 0.95 }}
             >
               <span className={styles.buttonIcon}>
                 {inCart ? <IoBagRemove /> : <FaCartPlus />}
               </span>
-              {inCart ? 'Remove from Cart' : 'Add to Cart'}
+              {inCart ? "Remove from Cart" : "Add to Cart"}
             </motion.button>
 
             <motion.button
-              className={`${styles.favoriteButton} ${inFavorites ? styles.active : ''}`}
-              onClick={() => inFavorites ? removeFromFavorites(product.id) : addToFavorites(product)}
+              className={`${styles.favoriteButton} ${
+                inFavorites ? styles.active : ""
+              }`}
+              onClick={() =>
+                inFavorites
+                  ? removeFromFavorites(product.id)
+                  : addToFavorites(product)
+              }
               whileTap={{ scale: 0.95 }}
             >
               {inFavorites ? <FaHeartBroken /> : <FaHeart />}
             </motion.button>
           </div>
+          <Toaster />
         </motion.div>
       </div>
     </div>

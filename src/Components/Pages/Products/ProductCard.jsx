@@ -6,13 +6,35 @@ import { IoBagRemove } from "react-icons/io5";
 import { favoriteContext } from "../../../Context/favorite";
 import { motion } from "framer-motion";
 import styles from "./productCard.module.css";
+import toast, { Toaster } from "react-hot-toast";
 
 export default function ProductCard({ product }) {
   const { isInCart, addToCart, removeFromCart } = useContext(cartContext);
-  const { isInFavorites, addToFavorites, removeFromFavorites } = useContext(favoriteContext);
-  
+  const { isInFavorites, addToFavorites, removeFromFavorites } =
+    useContext(favoriteContext);
+
   const inCart = isInCart(product);
   const inFavorites = isInFavorites(product);
+
+  function handleAddToCart(product) {
+    addToCart(product);
+    toast.success(" added to cart ");
+  }
+
+  function handleRemoveFromCart(product) {
+    removeFromCart(product.id);
+    toast.error(" removed from cart ");
+  }
+
+  function handleAddToFavorites(product) {
+    addToFavorites(product);
+    toast.success(" added to favorites ");
+  }
+
+  function handleRemoveFromFavorites(product) {
+    removeFromFavorites(product.id);
+    toast.error(" removed from favorites ");
+  }
 
   return (
     <motion.div
@@ -31,13 +53,19 @@ export default function ProductCard({ product }) {
             />
           </Link>
           <button
-            className={`${styles.favoriteButton} ${inFavorites ? styles.active : ''}`}
-            onClick={() => inFavorites ? removeFromFavorites(product.id) : addToFavorites(product)}
+            className={`${styles.favoriteButton} ${
+              inFavorites ? styles.active : ""
+            }`}
+            onClick={() =>
+              inFavorites
+                ? handleRemoveFromFavorites(product)
+                : handleAddToFavorites(product)
+            }
           >
             {inFavorites ? <FaHeartBroken /> : <FaHeart />}
           </button>
         </div>
-        
+
         <div className={styles.cardBody}>
           <Link to={`/prod/${product.id}`} className={styles.productLink}>
             <h5 className={styles.cardTitle}>
@@ -45,19 +73,23 @@ export default function ProductCard({ product }) {
             </h5>
           </Link>
           <p className={styles.price}>{product.price} EGP</p>
-          
+
           <motion.button
-            className={`${styles.cartButton} ${inCart ? styles.removeBtn : ''}`}
-            onClick={() => inCart ? removeFromCart(product.id) : addToCart(product)}
+            className={`${styles.cartButton} ${inCart ? styles.removeBtn : ""}`}
+            onClick={() =>
+              inCart ? handleRemoveFromCart(product) : handleAddToCart(product)
+            }
             whileTap={{ scale: 0.95 }}
           >
             <span className={styles.buttonIcon}>
               {inCart ? <IoBagRemove /> : <FaCartPlus />}
             </span>
-            {inCart ? 'Remove from Cart' : 'Add to Cart'}
+            {inCart ? "Remove from Cart" : "Add to Cart"}
           </motion.button>
         </div>
       </div>
+
+      <Toaster />
     </motion.div>
   );
 }
